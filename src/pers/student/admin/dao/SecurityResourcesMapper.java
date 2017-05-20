@@ -1,10 +1,12 @@
 package pers.student.admin.dao;
 
+import pers.student.admin.po.SecurityResources;
+
 /**
  * 资源Mapper
  * @author mingshan
  *
  */
-public interface SecurityResourcesMapper<T> extends BaseMapper<T>{
+public interface SecurityResourcesMapper extends BaseMapper<SecurityResources>{
 
 }

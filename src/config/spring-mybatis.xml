@@ -17,7 +17,7 @@
 	<!-- 加载配置文件 -->
 	<context:property-placeholder location="classpath:config/db.properties" />
 
-	<!-- 数据源，使用dbcp -->
+	<!-- 数据源，使用 c3p0-->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driver}" />
@@ -76,7 +76,7 @@
     <!-- Spring aop事务管理 -->  
     <aop:config>  
         <aop:pointcut id="transactionPointcut"  
-            expression="execution(* com.yjw.andy.service..*Impl.*(..))" />  
+            expression="execution(* pers.student.admin.service..*Impl.*(..))" />  
         <aop:advisor pointcut-ref="transactionPointcut"  
             advice-ref="transactionAdvice" />  
     </aop:config>  

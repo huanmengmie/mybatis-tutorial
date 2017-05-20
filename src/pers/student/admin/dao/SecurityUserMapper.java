@@ -1,5 +1,8 @@
 package pers.student.admin.dao;
 
+import java.util.List;
+
+
 import pers.student.admin.po.SecurityUser;
 
 /**
@@ -9,5 +12,12 @@ import pers.student.admin.po.SecurityUser;
  */
 public interface SecurityUserMapper extends BaseMapper<SecurityUser>{
 
+
+	//根据用户名查找角色
+	String selectUserRole(String username);
+	
+	//获取用户的权限
+	SecurityUser selectUserPersmission(String username);
+	
 	
 }

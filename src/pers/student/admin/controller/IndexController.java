@@ -27,7 +27,6 @@ public class IndexController {
 	public String goIndex(ModelMap map){
 		
 		List<SecurityUser> list=(List<SecurityUser>) userService.findAll();
-		
 		System.out.println(list);
 		
 		map.put("list", list);

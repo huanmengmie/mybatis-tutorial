@@ -96,4 +96,10 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 		return baseMapper.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public T selectByUniqueFiled(T t) {
+		// TODO Auto-generated method stub
+		return baseMapper.selectByUniqueFiled(t);
+	}
+
 }

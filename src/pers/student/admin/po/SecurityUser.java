@@ -1,5 +1,7 @@
 package pers.student.admin.po;
 
+import java.util.List;
+
 /**
  * 用户
  * @author mingshan
@@ -34,6 +36,9 @@ public class SecurityUser {
 	//验证
 	private String validataCode;
 
+	//用户权限	
+	List<SecurityPermission> permission;
+	
 	public int getId() {
 		return id;
 	}
@@ -105,6 +110,16 @@ public class SecurityUser {
 	public void setValidataCode(String validataCode) {
 		this.validataCode = validataCode;
 	}
+
+	public List<SecurityPermission> getPermission() {
+		return permission;
+	}
+
+	public void setPermission(List<SecurityPermission> permission) {
+		this.permission = permission;
+	}
+
+	
 	
 	
 

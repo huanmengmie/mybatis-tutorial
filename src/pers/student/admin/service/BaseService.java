@@ -18,6 +18,8 @@ public interface BaseService<T> {
 	
 	int insertSelective(T model);
 	
+	T selectByUniqueFiled(T t);
+	
 	int update(T model);
 	
 	int del(Integer id);	
