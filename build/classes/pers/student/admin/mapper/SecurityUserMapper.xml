@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="pers.student.admin.dao.SecurityUserMapper">  
+
+ <resultMap type="pers.student.admin.po.SecurityUser" id="userResultMap">
+	 	<!-- id表示查询结果集中唯一标识 
+	 	column：查询出来的列名
+	 	property：type指定的pojo类型中的属性名
+	 	最终resultMap对column和property作一个映射关系 （对应关系）
+	 	-->
+	 	<id column="id" property="id"/>
+
+	 	<result column="username" property="userName"/>
+	 
+</resultMap>
+
+<select id="selectAll" resultMap="userResultMap">
+   select * from ps_security_user
+</select>
+
+</mapper>
