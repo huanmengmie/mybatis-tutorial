@@ -67,6 +67,16 @@
 	select u.id,u.username,u.email,u.add_time from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 and u.username  LIKE '%${value}%' 
 </select>
 
+<!-- 查询全部学生  -分页查询-->
+<select id="selectStudent" parameterType="Map" resultMap="userResultMap">
+	select u.id,u.username,u.email,u.add_time from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 limit #{position},#{pageSize}
+</select>
+
+<!--查询全部学生 数量  -->
+<select id="findStudentCount" resultMap="int">
+    select count(CASE WHEN ul.user_id=u.id and ul.role_id=8  THEN 1 ELSE NULL END) from ps_security_user u,ps_security_user_to_role ul
+</select>
+
 <!-- 通过用户名获取角色 -->
 <select id="selectUserRole" parameterType="java.lang.String" resultType="java.lang.String">
 

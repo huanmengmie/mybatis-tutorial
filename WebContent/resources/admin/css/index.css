@@ -180,14 +180,16 @@ body{
     background-color:#fff;
 	line-height: 50px;
 }
+
 .search-container ul li{
 	list-style-type: none;
-
+    
 	line-height: 20px;
 }
 .search-container ul li a{
 	display: inline-block;
-
+    color:#666666;
+    text-decoration: none;
 }
 .search-container ul li a:hover{
 	color:black;
@@ -202,97 +204,15 @@ body{
 	line-height: 20px;
 	margin-left: 20px;
 }
-.search-topic{
-	width:100%;
-	min-height:50px;
-}
-.search-topic-o ul > li > a{
-  font-size:15px;
-  color:#848FA4;	
-  text-decoration:none;
-  width: 100%;
-   padding-left: 20px;
-}
-.search-topic-o ul > li > a >span{
-	display:inline-block;
-	margin-top:10px;
-	color:#0F88EB;
-	font-size:15px;
-	background-color:#F4F4FA;
-	height:22px;
-	min-width:30px;
-	padding-left:10px;
-	padding-right:10px;
-	text-decoration: none;
-	border-radius:9px;
-}
-.search-user{
-	width:100%;
-	min-height:50px;
-}
-.search-user-t ul > li > a{
-	text-decoration:none;
-	 padding-left: 20px;
-	 color: black;
-}
-.search-user-t ul > li > a > span{
-	font-size:13px;
-    color:#848FA4;	
-    margin-left: 10px;
-}
-.search-content{
-	width:100%;
-	height:auto!important; 
-	height:250px;
-	min-height:50px;
-	
-}
-.search-content-t ul > li >a{
-	display:inline-block;
-	color:black;
-    padding-left: 20px;
-	text-decoration:none;
-}
-.search-content-t ul > li >a >span{
-	font-size:13px;
-    color:#848FA4;	
-    margin-left: 10px;
-}
-.search-topic-o  ul  li  a{
-	display: inline-block;
-	width: 485px;
-    height: 30px;
-    padding-top: 6px;
-    padding-bottom: 12px;
-}
-.search-user-t ul  li  a{
-	display: inline-block;
-	width: 485px;
-	height: 30px;
-	padding-top: 12px;
-	padding-bottom: 6px;
-}
-.search-content-t ul  li  a{
-	display: inline-block;
-	width: 485px;
-	min-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 6px;
-}
-.search-content-t ul  li  a:hover{
-	background: #EBF3FB;
-}
-.search-user-t  ul  li  a:hover{
-	background: #EBF3FB;
-}
-.search-topic-o ul  li  a:hover{
-	background: #EBF3FB;
-}
+
+
+
 .search-look-all-result{
 	background: #F6F6F6;
 	width: 520px;
 	margin-top: 5px;
 	height:40px;
+	
 }
 .search-look-all-result a{
 	color: #808080;

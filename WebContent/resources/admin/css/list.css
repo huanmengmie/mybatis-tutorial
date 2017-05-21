@@ -1,0 +1,26 @@
+.new_div3{
+    width: 70%;min-height: 115px;
+    margin: auto;margin-top: 10px;
+    background-color: white;
+}
+.new_div3 table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.new_div3 table th{
+    height: 50px;
+    border-bottom: 2px aliceblue solid;
+    text-align: left;
+}
+.new_div3 table td{
+    height: 30px;
+    border-bottom: 1px aliceblue solid;
+}
+ .new_div3 table td a{
+	color: #467B96;
+	text-decoration: none;
+}
+.new_div3 table td a:hover{
+	color: #467B96;
+	text-decoration: underline;
+}

@@ -3,6 +3,7 @@ package pers.student.admin.service.impl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,20 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 		// TODO Auto-generated method stub
 		List<SecurityUser> list=securityUserMapper.selectUserByToken(username);
 		return list;
+	}
+
+	@Override
+	public List<SecurityUser> selectStudent(Map map) {
+		// TODO Auto-generated method stub
+		
+		List<SecurityUser> list=securityUserMapper.selectStudent(map);
+		return list;
+	}
+
+	@Override
+	public int findStudentCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

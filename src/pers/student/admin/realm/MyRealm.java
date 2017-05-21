@@ -50,7 +50,7 @@ public class MyRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// TODO Auto-generated method stub
 		String userName=(String) token.getPrincipal();
-		//3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
+		//realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
 		String realmName = getName();
 		SecurityUser user=new SecurityUser();
 		user.setUserName(userName);
