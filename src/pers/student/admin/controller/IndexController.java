@@ -17,7 +17,7 @@ import pers.student.admin.service.UserService;
  */
 
 @Controller
-@RequestMapping("/m")
+@RequestMapping("/admin")
 public class IndexController {
 
 	@Autowired

@@ -3,5 +3,5 @@
     
  <!-- 入口文件 -->
 <%
-response.sendRedirect("m/index");
+response.sendRedirect("admin/index");
 %>

@@ -31,12 +31,12 @@
 <!-- 查询sql -->
  <sql id="query_user_where">
  	 
-	 <if test="username != null and username !=''">
-	 and username=#{value} 
+	 <if test="userName != null and userName !=''">
+	 and username=#{userName} 
 	 </if>
 	 
      <if test="email != null and email !=''">
-	 and email=#{value} 
+	 and email=#{email} 
 	 </if>
 	 
  </sql>
