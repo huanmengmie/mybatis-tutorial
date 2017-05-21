@@ -15,7 +15,8 @@
 	 	<id column="id" property="id"/>
 
 	 	<result column="username" property="userName"/>
-	 
+	    <result column="email" property="email"/>
+	    <result column="add_time" property="addTime"/>
 </resultMap>
 
 <!-- 用户的权限  resultMap-->
@@ -58,6 +59,12 @@
       		<!--引用sql片段  -->
            <include refid="query_user_where"></include>
      </where> 
+</select>
+
+<!-- 模糊查询用户 -学生-->
+<select id="selectUserByToken" parameterType="java.lang.String" resultMap="userResultMap">
+
+	select u.id,u.username,u.email,u.add_time from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 and u.username  LIKE '%${value}%' 
 </select>
 
 <!-- 通过用户名获取角色 -->

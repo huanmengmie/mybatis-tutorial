@@ -1,6 +1,9 @@
 package pers.student.admin.po;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 用户
@@ -28,7 +31,8 @@ public class SecurityUser {
 	
 	
 	//注册时间
-	private String addTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date addTime;
 	
 	//过期时间
 	private Long outDate;
@@ -87,11 +91,12 @@ public class SecurityUser {
 		this.email = email;
 	}
 
-	public String getAddTime() {
+
+	public Date getAddTime() {
 		return addTime;
 	}
 
-	public void setAddTime(String addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 

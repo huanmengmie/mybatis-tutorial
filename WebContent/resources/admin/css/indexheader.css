@@ -85,44 +85,7 @@ body {
 	background-color: #fff;
 	
 }
-.dropdown-menu.categories a {
-	color: #000;
-}
-.dropdown-menu.categories a:hover {
-	color: #5bc4be;
-	margin-left: 10px;
-}
-#search:target a[href="#search"] {
-	display: none;
-}
-#search:target ~ #search-hidden {
-	display: block;
-}
-#search-hidden {
-	display: block;
-	padding: 0 5px;
-	left:-30px;
-}
-#search-hidden input {
-	border: 1px solid #fff;
-	line-height:25px;
-	background:#F4F4F4;
-	border-radius:3px 0px 0px 3px;
-	height:25px;
-	width: 260px;
-	font-size:15px;
-	padding:3px;
-}
-#search-hidden input:focus{
-	border: 1px solid #fff;
-	line-height:25px;
-	background:#fff;
-	border-radius:3px 0px 0px 3px;
-	height:25px;
-	width: 260px;
-	font-size:15px;
-	padding:3px;
-}
+
 /* WebKit browsers */
 ::-webkit-input-placeholder {
 	color: #777;
@@ -143,30 +106,6 @@ body {
 }
 
 
-.search_btn{
-	background-color:#f4f4f4;
-	margin-top:13.5px;
-	display:inline-block;	
-	border-radius:0px 3px 3px 0px;
-    height:33px;
-	width:0px;
-	margin-left:-1px;
-	
-}
-.search_btn:hover{
-
-	margin-top:13.5px;
-	display:inline-block;	
-	border-radius:0px 3px 3px 0px;
-    height:33px;
-	width:0px;
-	margin-left:-1px;
-}
-.search_btn > img{
-	position:relative;
-	left:-20px;
-	top:-9px;
-}
 .menu-function > li > a,.menu-share > li > a {
 	padding-left: 40px;
 }
@@ -220,30 +159,14 @@ body {
 	color: #07beed;
 	
 }
-.dropdown-menu.follow li:nth-child(3) a {
-	color: #314d91;
-}
-.dropdown-menu.follow li:nth-child(4) a {
-	color: #2d2d2d;
-}
-.dropdown-menu.follow li:nth-child(5) a {
-	color: #e84788;
-}
+
 .dropdown-menu.follow li:nth-child(1):hover {
 	background-color: #ffaa31;
 } 
 .dropdown-menu.follow li:nth-child(2):hover {
 	background-color: #07beed;
 } 
-.dropdown-menu.follow li:nth-child(3):hover {
-	background-color: #314d91;
-} 
-.dropdown-menu.follow li:nth-child(4):hover {
-	background-color: #2d2d2d;
-} 
-.dropdown-menu.follow li:nth-child(5):hover {
-	background-color: #e84788;
-} 
+
 .dropdown-menu.follow li:hover a {
 	color: #fff;
 	margin-left: 10px;
@@ -275,19 +198,6 @@ body {
 	left: 5px;
 	
 }
-.dropdown-menu.share li:nth-child(1) a:before {
-	
-	color: #314d91;
-	
-}
-.dropdown-menu.share li:nth-child(2) a:before {
-	
-	color: #07beed;
 
-}
-.dropdown-menu.share li:nth-child(3) a:before {
-	
-	color: #2d2d2d;
-	
-}
+
 

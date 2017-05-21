@@ -2,6 +2,8 @@ package pers.student.admin.controller;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,10 +28,14 @@ public class IndexController {
 	@RequestMapping("/index")
 	public String goIndex(ModelMap map){
 		
-		List<SecurityUser> list=(List<SecurityUser>) userService.findAll();
-		System.out.println(list);
+		Subject currentUser = SecurityUtils.getSubject();
+	    String  userName=(String) currentUser.getPrincipal();
+	    SecurityUser user=new SecurityUser();
+	    user.setUserName(userName);
+		user=userService.selectByUniqueFiled(user);
 		
-		map.put("list", list);
+		
+		map.put("user", user);
 		return "admin/index";
 	}
 }

@@ -2,6 +2,7 @@ package pers.student.admin.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,11 @@ import pers.student.admin.po.SecurityPermission;
 import pers.student.admin.po.SecurityUser;
 import pers.student.admin.service.UserService;
 
+/**
+ * 用户service
+ * @author mingshan
+ *
+ */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements UserService{
 
@@ -38,6 +44,13 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 			permissions.add(l.getPermissionName());
 		}
 		return permissions;
+	}
+
+	@Override
+	public List<SecurityUser> selectUserByToken(String username) {
+		// TODO Auto-generated method stub
+		List<SecurityUser> list=securityUserMapper.selectUserByToken(username);
+		return list;
 	}
 
 }
