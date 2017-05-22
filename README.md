@@ -1,4 +1,4 @@
 # mybatis-tutorial
 a simple mybatis tutorial
-# use
+# framework
 shiro,spring,springmvc,mybatis
