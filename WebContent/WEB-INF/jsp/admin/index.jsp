@@ -13,7 +13,7 @@
 <c:set var="CTP_ADMIN" value="${pageContext.request.contextPath}/resources/admin"></c:set>
 <script type="text/javascript">
 var CTPPATH="${pageContext.request.contextPath}";
-var DEFAULT_EMAIL="${user.email}";
+var DEFAULT_USERNAME="<shiro:principal/>";
 </script>
 <link rel="stylesheet" href="${CTP_ADMIN}/css/indexheader.css" />
 <link rel="stylesheet" href="${CTP_ADMIN}/css/index.css" />

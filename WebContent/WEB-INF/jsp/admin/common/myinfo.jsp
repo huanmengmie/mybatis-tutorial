@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+   
 <!--个人信息-->
 <div class="modalDialog " >
 	<div>
@@ -11,7 +10,7 @@
             
             <div class="login-content login-form">
             <form action="">
-                 <input type="hidden" class="uid" value="${user.id}"/>
+                 <input type="hidden" class="uid" value=""/>
                  <label>
 				    <input type="text" name="username" class="l_username" value="" required  autocomplete="off">
 				</label>

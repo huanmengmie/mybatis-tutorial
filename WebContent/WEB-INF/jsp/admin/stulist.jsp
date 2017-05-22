@@ -15,8 +15,7 @@
 <link rel="stylesheet" href="${CTP_ADMIN}/css/page.css"/>
 <script type="text/javascript">
 var CTPPATH="${pageContext.request.contextPath}";
-
-var DEFAULT_EMAIL="${user.email}";
+var DEFAULT_USERNAME="<shiro:principal/>";
 </script>
 
 <link rel="stylesheet" href="${CTP_ADMIN}/css/index.css" />

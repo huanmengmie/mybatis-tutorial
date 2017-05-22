@@ -47,7 +47,7 @@ button:active {
 .footer {
             margin: 40px auto;
             
-            width:300px;
+            width:200px;
             color: #999;
             text-transform: uppercase;
             font-size: 13px;
@@ -66,12 +66,12 @@ button:active {
 
 
 <div class="no-auth-div"><img src="${CTP_ADMIN}/image/no-auth.png"/><span>抱歉，认证未通过，或者权限不足!</span>
-<div class="bb"><button type="button"      onclick="window.location.href='${pageContext.request.contextPath}/m/index'">返回主页</button>  <button type="button"      onclick="self.location=document.referrer;">返回上一页</button></div>
+<div class="bb"><button type="button"      onclick="window.location.href='${pageContext.request.contextPath}/admin/index'">返回主页</button>  <button type="button"      onclick="self.location=document.referrer;">返回上一页</button></div>
 
 </div>
 
  <div class="footer text-center">
-         &copy;${WEB_CURRENT_YEAR} <a href="${pageContext.request.contextPath}/m/index">zzz</a>
+         &copy; <a href="${pageContext.request.contextPath}/admin/index">Mingshan</a>
 </div>
 </body>
 </html>

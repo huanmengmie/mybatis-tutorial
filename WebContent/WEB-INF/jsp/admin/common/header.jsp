@@ -3,7 +3,6 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
      
 <script type="text/javascript">
-var DEFAULT_USERNAME="<shiro:principal/>";
 $(function(){
 	//退出系统处理
 	$('.logout').bind('click',function(){
@@ -33,8 +32,9 @@ $(function(){
 			
 				<ul class="menu-share">
 				
-				<li><a href="${pageContext.request.contextPath}/admin/authority/roleList">权限管理</a></li>
-				
+				<shiro:hasAnyRoles name="superadmin">
+				    <li><a href="${pageContext.request.contextPath}/admin/authority/roleList">权限管理</a></li>
+				</shiro:hasAnyRoles>
 				<%-- 只有超级管理员 和老师   有权限 --%>
 				<shiro:hasAnyRoles name="superadmin,teacher">
                 <li> <a href="${pageContext.request.contextPath}/admin/teacher/findStudentList?p=1">查看学生</a></li>

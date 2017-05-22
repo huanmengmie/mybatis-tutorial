@@ -5,7 +5,7 @@ $(function(){
 	var ok_old_password=false;
 	var ok_new_password=false;
     var ok_re_new_password=false;
-	
+    var DEFAULT_EMAIL="";
 	$(".look-myself-btn").bind("click",function(){
 		
 		
@@ -27,10 +27,12 @@ $(function(){
 					  layer.closeAll('loading');
 				}, 1000);
 			   //获取信息
+				$(".uid").val(data.id);
 			    $(".l_username").val(data.userName);
 			    $(".l_email").val(data.email);
 			    $(".l_time").val(showLocale(data.addTime));
-				
+			    DEFAULT_USERNAME=data.userName;
+			    DEFAULT_EMAIL=data.email;
 				
 			},
 			error:function(){
