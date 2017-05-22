@@ -15,4 +15,19 @@
 	insert into ps_security_user_to_role (role_id,user_id) values (#{roleId} ,#{userId})
 </insert>
 
+<!-- 更新用户角色 -->
+<update id="updateByPrimaryKeySelective" parameterType="pers.student.admin.po.SecurityUserToRole">
+	update ps_security_user_to_role 
+	
+	<set>
+	    <if test="roleId !=null and roleId !=''">
+	        role_id=#{roleId}
+	    </if>
+	    
+	</set>
+	 
+	 where user_id=#{userId}
+
+</update>
+
 </mapper>

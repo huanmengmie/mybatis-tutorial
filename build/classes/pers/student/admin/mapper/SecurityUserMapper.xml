@@ -17,6 +17,8 @@
 	 	<result column="username" property="userName"/>
 	    <result column="email" property="email"/>
 	    <result column="add_time" property="addTime"/>
+	    <result column="status" property="status"/>
+	    <result column="role_name" property="roleName"/>
 </resultMap>
 
 <!-- 用户的权限  resultMap-->
@@ -39,6 +41,14 @@
      <if test="email != null and email !=''">
 	 and email=#{email} 
 	 </if>
+	 
+	 
+	<if test="ids !=null and ids!='' ">
+		<!-- foreach  遍历集合  拼接sql  id in(1,2) -->
+         <foreach collection="ids" item="item" open="id in(" close=")" separator="," >        
+         	#{item}
+         </foreach> 
+	</if>
 	 
  </sql>
  
@@ -64,17 +74,34 @@
 <!-- 模糊查询用户 -学生-->
 <select id="selectUserByToken" parameterType="java.lang.String" resultMap="userResultMap">
 
-	select u.id,u.username,u.email,u.add_time from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 and u.username  LIKE '%${value}%' 
+	select u.id,u.username,u.email,u.add_time,u.status from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 and u.username  LIKE '%${value}%' 
+</select>
+
+<!-- 模糊查询所有用户 -->
+<select id="selectAllUserByToken" parameterType="java.lang.String" resultMap="userResultMap">
+	select u.*,r.role_name from ps_security_user u,ps_security_role r,ps_security_user_to_role ur where u.id=ur.user_id and r.id=ur.role_id and u.username LIKE '%${value}%'
 </select>
 
 <!-- 查询全部学生  -分页查询-->
-<select id="selectStudent" parameterType="Map" resultMap="userResultMap">
-	select u.id,u.username,u.email,u.add_time from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 limit #{position},#{pageSize}
+<select id="selectStudent" parameterType="java.util.Map" resultMap="userResultMap">
+	select u.id,u.username,u.email,u.add_time,u.status from ps_security_user u,ps_security_user_to_role ul where  ul.user_id=u.id and ul.role_id=8 limit #{position},#{pageSize}
 </select>
 
 <!--查询全部学生 数量  -->
-<select id="findStudentCount" resultMap="int">
+<select id="findStudentCount" resultType="java.lang.Integer">
     select count(CASE WHEN ul.user_id=u.id and ul.role_id=8  THEN 1 ELSE NULL END) from ps_security_user u,ps_security_user_to_role ul
+</select>
+
+
+<!-- 查询所有用户-数量 -->
+<select id="findUserCount" resultType="java.lang.Integer">
+	select count(*) from ps_security_user
+</select>
+
+<!-- 查询所有用户 - 分页    -->
+<select id="selectUserList" parameterType="java.util.Map" resultMap="userResultMap">
+	select u.*,r.role_name from ps_security_user u,ps_security_role r,ps_security_user_to_role ur where u.id=ur.user_id and r.id=ur.role_id  limit #{position},#{pageSize}
+
 </select>
 
 <!-- 通过用户名获取角色 -->
@@ -102,14 +129,34 @@
     
 </insert>
 
-<!-- 删除用户 -->
-<delete id="deleteByPrimaryKey"  parameterType="java.lang.Integer">
-   delete from ps_security_user where id=#{id}
+<!-- 删除用户 -批量-->
+<delete id="deleteBatch"  parameterType="pers.student.admin.po.SecurityUser">
+   delete from ps_security_user
+   <where>
+     <include refid="query_user_where"></include>
+   </where>
+   
 </delete>
 
 <!-- 修改用户 -->
 <update id="updateByPrimaryKeySelective" parameterType="pers.student.admin.po.SecurityUser">
-	update ps_security_user set username=#{userName},password=#{password} where id=#{id}
+	update ps_security_user 
+	<set>
+	      <if test="userName !=null and userName !=''">
+	        username=#{userName},
+	      </if>
+	      <if test="email !=null and email !=''">
+	        email=#{email},
+	      </if>
+	      <if test="password !=null and password !=''">
+	        password=#{password}, 
+	      </if>
+	      <if test="salt !=null and salt !=''">
+	        salt=#{salt}
+	      </if>
+	     	      
+	</set>	
+	where id=#{id}
 </update>
 
 </mapper>

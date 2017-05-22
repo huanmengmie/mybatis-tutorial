@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 
 import pers.student.admin.config.PageSizeConfig;
 import pers.student.admin.po.SecurityUser;
+import pers.student.admin.service.PageHelperService;
 import pers.student.admin.service.UserService;
 
 /**
@@ -32,6 +35,10 @@ public class TeacherController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PageHelperService pageHelperService;
+	
 	
 	private int pageSize=PageSizeConfig.ADMIN_PAGE_SIZE;
 	/**
@@ -65,15 +72,12 @@ public class TeacherController {
 	/**
 	 * 查询学生  -分页
 	 */
-	@RequestMapping("findStudentList")
+	@RequestMapping("/findStudentList")
 	public String  findStudentList(int p,ModelMap map){
 	   String sp=p+"";
 	   if(sp.equals("")){
 			p=1;
 	   }
-	   //查看详细信息url
-	   String durl="trends";
-		
 	   //当前的url
 	   String url="./findStudentList?p=";
 		
@@ -82,13 +86,26 @@ public class TeacherController {
 	   //计算偏移量
 	   int position=(p-1)*pageSize;
 	 
-	   HashMap<String,Integer> uMap=new HashMap<String,Integer>();
+	   HashMap<String,Object> uMap=new HashMap<String,Object>();
 	   uMap.put("position", position);
 	   uMap.put("pageSize",pageSize);
 	   ArrayList<SecurityUser> list=(ArrayList<SecurityUser>) userService.selectStudent(uMap);
 	   
-	   map.put("list", list);
+	   //分页工具
+	   String toolBar=pageHelperService.createToolBar(count, pageSize, url, p);
 	   
-	   return "";
+	   //个人信息	
+	   Subject currentUser = SecurityUtils.getSubject();
+	   String  userName=(String) currentUser.getPrincipal();
+	   SecurityUser user=new SecurityUser();
+	   user.setUserName(userName);
+	   user=userService.selectByUniqueFiled(user);
+		
+		
+	   map.put("user", user);
+	   
+	   map.put("list", list);
+	   map.put("toolBar", toolBar);
+	   return "admin/stulist";
 	}
 }

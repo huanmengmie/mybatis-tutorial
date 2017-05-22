@@ -1,3 +1,27 @@
+
+$(function(){
+	//全选和取消全选
+	$('.new_div2_input').click(function(){
+	  var is_check=$('.new_div2_input').is(':checked');
+	  var info_check=document.getElementsByName('info_id');
+	  if(is_check==true){
+
+		for(var i=0;i<info_check.length;i++){
+			info_check[i].checked=true;
+		}
+			  	   
+	  }else{
+	  	for(var i=0;i<info_check.length;i++){
+		    info_check[i].checked=false;
+		}
+	  }
+	});
+	
+	
+
+});
+
+
 //时间     - 年月日
 function showLocale(){
 	var date = new Date();

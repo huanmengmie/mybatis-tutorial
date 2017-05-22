@@ -43,6 +43,13 @@ public class SecurityUser {
 	//用户权限	
 	List<SecurityPermission> permission;
 	
+	//用户的角色
+	private String roleName;
+	
+	//批量删除
+	private List<Integer> ids;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -124,12 +131,23 @@ public class SecurityUser {
 		this.permission = permission;
 	}
 
-	
-	
-	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public List<Integer> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
+	}
 
 	
-
 	
 	
 }

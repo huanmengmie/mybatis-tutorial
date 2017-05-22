@@ -4,6 +4,7 @@ package pers.student.admin.dao;
 import java.util.List;
 import java.util.Map;
 
+import pers.student.admin.po.SecurityRole;
 import pers.student.admin.po.SecurityUser;
 
 /**
@@ -28,4 +29,16 @@ public interface SecurityUserMapper extends BaseMapper<SecurityUser>{
 	
 	//查询所有的学生 数量   -分页
 	int findStudentCount();
+	
+	//查询所有用户 -数量
+	int findUserCount();
+	
+	//查询所有用户 -分页
+	List<SecurityUser> selectUserList(Map map);
+	
+	//批量删除
+	int deleteBatch(SecurityUser securityUser); 
+	
+	//模糊查询所有用户
+	List<SecurityUser> selectAllUserByToken(String token);
 }

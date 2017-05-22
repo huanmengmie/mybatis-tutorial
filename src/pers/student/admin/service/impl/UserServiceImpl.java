@@ -39,10 +39,13 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 		// TODO Auto-generated method stub
 		Set<String>  permissions =new HashSet<String>();
 		SecurityUser user=securityUserMapper.selectUserPersmission(userName);
-		ArrayList<SecurityPermission> list=(ArrayList<SecurityPermission>) user.getPermission(); 
-		
-		for(SecurityPermission l :list){
-			permissions.add(l.getPermissionName());
+		if(user!=null){
+			
+			ArrayList<SecurityPermission> list=(ArrayList<SecurityPermission>) user.getPermission(); 
+			
+			for(SecurityPermission l :list){
+				permissions.add(l.getPermissionName());
+			}
 		}
 		return permissions;
 	}
@@ -65,7 +68,32 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 	@Override
 	public int findStudentCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return securityUserMapper.findStudentCount();
+	}
+
+	@Override
+	public int findUserCount() {
+		// TODO Auto-generated method stub
+		return securityUserMapper.findUserCount();
+	}
+
+	@Override
+	public List<SecurityUser> selectUserList(Map map) {
+		// TODO Auto-generated method stub
+		return securityUserMapper.selectUserList(map);
+	}
+
+	@Override
+	public int deleteBatch(SecurityUser securityUser) {
+		// TODO Auto-generated method stub
+		return securityUserMapper.deleteBatch(securityUser);
+	}
+
+	@Override
+	public List<SecurityUser> selectAllUserByToken(String token) {
+		// TODO Auto-generated method stub
+		return securityUserMapper.selectAllUserByToken(token);
 	}
 
 }

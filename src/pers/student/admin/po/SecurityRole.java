@@ -1,6 +1,6 @@
 package pers.student.admin.po;
 
-
+import java.util.List;
 
 /**
  * 角色
@@ -17,6 +17,9 @@ public class SecurityRole{
 
 
 	private String roleCode;
+	
+	//批量删除用
+	private List<Integer> ids;
 	
 	public int getId() {
 		return id;
@@ -40,6 +43,14 @@ public class SecurityRole{
 
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
+	}
+
+	public List<Integer> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
 	}
 	
 	

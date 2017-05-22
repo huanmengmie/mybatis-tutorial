@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="${CTP_ADMIN}/css/page.css"/>
 <script type="text/javascript">
 var CTPPATH="${pageContext.request.contextPath}";
+
+var DEFAULT_EMAIL="${user.email}";
 </script>
 
 <link rel="stylesheet" href="${CTP_ADMIN}/css/index.css" />
@@ -35,23 +37,25 @@ var CTPPATH="${pageContext.request.contextPath}";
     <div class="new_div3">            
             <table>
                 <tr>
-                    <th></th>
-                    <th>标题</th>
-                    <th>作者</th>
-                    <th>类别</th>
-                    <th>发布日期</th>
+        
+                    <th>学生名称</th>
+                    <th>学生邮箱</th>
+                    <th>学生状态</th>
+                    <th>注册日期</th>
                 </tr>
-                <c:forEach var="list" items="${item }">
+                <c:forEach var="list" items="${list }">
                 <tr>
-                    <td width="5%" align="center"><input type="checkbox" name="info_id" value="${list.id}"/></td>
-                    <td width="35%"><a href="${CTP}/admin/distribute/${durl }?id=${list.id}" class="item_title" title="${list.itemTitle }">${list.itemTitle }</a>
-                     <c:if test="${list.isPublish eq 0}">
-		              <span class="draft-span">草稿</span>
-		             </c:if>
+                 
+                    <td width="30%"><a href="javascript:void(0);" class="item_title" title="${list.userName }">${list.userName }</a>
                     </td>
-                    <td width="20%"><a href="">${list.author }</a></td>
-                    <td width="20%"><a href="">${typeName }</a></td>
-                    <td width="20%"><fmt:formatDate value="${list.addTime }" pattern="yyyy-MM-dd"/></td>
+                    <td width="20%"><a href="javascript:void(0);">${list.email }</a></td>
+                    <td width="10%">
+                    <c:choose>
+                     	<c:when test="${list.status eq 1}">启用</c:when>
+                     	<c:otherwise>禁用</c:otherwise>
+                    </c:choose>
+                    </td>
+                    <td width="20%"><fmt:formatDate value="${list.addTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 </tr>
                 </c:forEach>
             </table>
@@ -60,5 +64,8 @@ var CTPPATH="${pageContext.request.contextPath}";
         </div>
 </div>
 <!-- E CONTENT -->
+
+<!-- 个人信息 -->
+<jsp:include page="common/myinfo.jsp"></jsp:include>
 </body>
 </html>

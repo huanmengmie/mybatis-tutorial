@@ -2,6 +2,7 @@ package pers.student.admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,10 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSON;
 
 import pers.student.admin.po.SecurityUser;
 import pers.student.admin.po.SecurityUserToRole;
@@ -51,6 +55,7 @@ public class UserController {
 	 * 认证未通过或者权限不足
 	 * @return
 	 */
+	@RequestMapping("/unauthorized")
 	public String unauthorized(){
 		return "admin/user/unauthorized";
 	}
@@ -210,7 +215,7 @@ public class UserController {
 	 */
 	@RequestMapping("/update")
 	@ResponseBody
-	public String updatwePassword(int uid,String userName,String email,String oldPassword,String newPassword){
+	public String updatwePassword(int uid,String userName,String email, @RequestParam(required=false) String oldPassword, @RequestParam(required=false) String newPassword){
 		String result="";
 		SecurityUser user=new SecurityUser();
 		user=(SecurityUser) userService.findById(uid);
@@ -219,29 +224,74 @@ public class UserController {
 		System.out.println(oldpw);
 		//获取原始用户名
 		String oldUsername=user.getUserName();
-		//需要将传过来的比对的密码进行加密
-		Object object=CrypographyUtil.MD5(oldUsername, oldPassword, oldUsername);
-		String oldMD5Pw=object.toString();
-		if(oldMD5Pw.equals(oldpw)){
-			//此时密码比对正确，进行更改密码和用户名操作
-	
-			 //将密码进行MD5加密保存
-			 Object object2=CrypographyUtil.MD5(userName, newPassword, userName);
-			 String MD5Pw=object2.toString();
-		     user.setUserName(userName);
-			 user.setEmail(MD5Pw);
+		
+		
+		//此时判断一下密码是否为空
+		if(oldPassword.equals("") && newPassword.equals("")){
+			//密码为空  不更新密码这一项
+			 user.setUserName(userName);
+			 user.setEmail(email);
 			 user.setSalt(userName);
-			 try{
-				 //执行更新操作
-				 userService.update(user);
-				 return "1";
-			 }catch(RuntimeException e){
-				 result="2";
-			 }
+			 //将密码置为空 ，不执行更改
+			 user.setPassword("");
+			
 		}else{
-			result="0";
+			//需要将传过来的比对的密码进行加密
+			Object object=CrypographyUtil.MD5(oldUsername, oldPassword, oldUsername);
+			String oldMD5Pw=object.toString();
+			if(oldMD5Pw.equals(oldpw)){
+				//此时密码比对正确，进行更改密码和用户名操作
+		
+				 //将密码进行MD5加密保存
+				 Object object2=CrypographyUtil.MD5(userName, newPassword, userName);
+				 String MD5Pw=object2.toString();
+			     user.setUserName(userName);
+				 user.setEmail(email);
+				 user.setPassword(MD5Pw);
+				 user.setSalt(userName);
+				
+			}else{
+				result="0";
+			}	
 		}
+		
+	    //最后再执行
+		try{
+			 //执行更新操作
+			 userService.update(user);
+			 return "1";
+		 }catch(RuntimeException e){
+			 result="2";
+		 }
 		return result;
+	}
+	
+	/**
+	 * 查询用户信息
+	 * @param id
+	 */
+	
+	@RequestMapping("/findUserInfo")
+	public void findUserInfo(String userName,HttpServletResponse response){
+		PrintWriter out=null;
+		//获取权限列表
+		SecurityUser user=new SecurityUser();
+		user.setUserName(userName);
+		user= userService.selectByUniqueFiled(user);
+		 //调用fastjson生成json信息
+		String json = JSON.toJSONString(user, true);
+		System.out.println(json);
+		response.setContentType("application/json");
+		try {
+			out=response.getWriter();
+			out.write(json);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			out.close();
+		}
 	}
 	
 	/**
@@ -256,5 +306,5 @@ public class UserController {
 	}
 	
 	
-	
+
 }

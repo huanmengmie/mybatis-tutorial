@@ -65,7 +65,7 @@ button:active {
 <body>
 
 
-<div class="no-auth-div"><img src="${CTP_ADMIN}/img/no-auth.png"/><span>抱歉，认证未通过，或者权限不足!</span>
+<div class="no-auth-div"><img src="${CTP_ADMIN}/image/no-auth.png"/><span>抱歉，认证未通过，或者权限不足!</span>
 <div class="bb"><button type="button"      onclick="window.location.href='${pageContext.request.contextPath}/m/index'">返回主页</button>  <button type="button"      onclick="self.location=document.referrer;">返回上一页</button></div>
 
 </div>

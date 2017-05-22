@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+     
 <script type="text/javascript">
-
+var DEFAULT_USERNAME="<shiro:principal/>";
 $(function(){
 	//退出系统处理
 	$('.logout').bind('click',function(){
@@ -14,6 +15,8 @@ $(function(){
 			  
 			});
 	});
+	
+
 });
 
 </script>
@@ -29,7 +32,14 @@ $(function(){
 				</ul>
 			
 				<ul class="menu-share">
-                <li> <a href="">查看学生</a></li>
+				
+				<li><a href="${pageContext.request.contextPath}/admin/authority/roleList">权限管理</a></li>
+				
+				<%-- 只有超级管理员 和老师   有权限 --%>
+				<shiro:hasAnyRoles name="superadmin,teacher">
+                <li> <a href="${pageContext.request.contextPath}/admin/teacher/findStudentList?p=1">查看学生</a></li>
+                </shiro:hasAnyRoles>
+                
                 
                 <li><a href="javascript:void(0);">${sessionScope.role}</a></li>
                        

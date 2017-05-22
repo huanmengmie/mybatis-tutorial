@@ -13,6 +13,7 @@
 <c:set var="CTP_ADMIN" value="${pageContext.request.contextPath}/resources/admin"></c:set>
 <script type="text/javascript">
 var CTPPATH="${pageContext.request.contextPath}";
+var DEFAULT_EMAIL="${user.email}";
 </script>
 <link rel="stylesheet" href="${CTP_ADMIN}/css/indexheader.css" />
 <link rel="stylesheet" href="${CTP_ADMIN}/css/index.css" />
@@ -32,60 +33,35 @@ var CTPPATH="${pageContext.request.contextPath}";
 	
 	<div class="search">
 		
+		<%-- 只有超级管理员 和老师   有权限 --%>
+	    <shiro:hasAnyRoles name="superadmin,teacher">
 		<input type="text" name="" class="searchinput" placeholder="请输入要搜索的关键字">
-		
-		
+	    
 		<!-- S SEARCH-RESULT -->	
 					
 		<div class="search-container"></div>
 		<!-- E SEARCH-RESULT -->
+	
+	    </shiro:hasAnyRoles>
+	
+	<!-- 访客 -->
+	<shiro:hasRole name="guest">
+	<div class="guest-tip">
+	<img alt="" src="${CTP_ADMIN}/image/tip.png"><br>
+	<span>
+	
+	欢迎您访问后台管理系统，您目前的角色是游客，后台功能对您不可用，请联系超级管理员为您分配角色。
+	</span>
+	
+	</div>
+	</shiro:hasRole>
 	
 	</div>
 	
 </div>	
 	
 
-<!--个人信息-->
-<div class="modalDialog " >
-	<div>
-		<a href="javascript:void(0);" title="关闭" class="close info-close" >X</a>
-		<span class="openModal-title">我的个人信息</span>
-        <div class="openModal-login">
-            
-            <div class="login-content login-form">
-                 <input type="hidden" class="uid" value="${user.id}"/>
-                 <label>
-				    <input type="text" name="username" class="l_username" value="${user.userName}" required  autocomplete="off">
-				</label>
-				
-				<label>
-				    <input type="text" name="email" class="l_email" value="${user.email}" required  autocomplete="off">
-				</label>
-				
-				<label>
-				    <input type="text" name="time" class="l_time" value="<fmt:formatDate value='${user.addTime}' pattern='yyyy-MM-dd HH:mm:ss'/>" readonly="readonly" required autocomplete="off">
-				</label>
-				
-				<label>
-				    <input type="password" name="old-password" class="l_old_password" required placeholder="Old Password" autocomplete="off">
-				</label>
-				
-				<label>
-				    <input type="password" name="new-password" class="l_new_password" required placeholder="New Password" autocomplete="off">
-				</label>
-				<label>
-				    <input type="password" name="re-new-password" class="l_re_new_password" required placeholder="Repeat New Password" autocomplete="off">
-				</label>
-				
-				<input type="submit" value="点击修改" >
-			 
-            </div> 
-            
-          
-        </div>       
-		
-	</div>
-</div>
+<jsp:include page="common/myinfo.jsp"></jsp:include>
 
 	</body>
 </html>
@@ -121,17 +97,23 @@ $(function(){
 
 				  var inHtml="";
 				  if(data.length!=0){
-					   inHtml+="<div class='search-user' style='width:100%;min-height:50px;'><p>学生列表</p><div class='search-user-t'><ul>"; 
+					   inHtml+="<div class='search-user' style='width:100%;min-height:50px;'><p>学生列表</p><div class='search-user-t'><table><tr> <th >学生名称</th><th >学生邮箱</th><th >学生状态</th><th>注册日期</th></tr>"; 
 				  }
 				  
 					$.each(data,function(id,item){
 						 if(item.length!=0){
-						    inHtml="<li style='list-style-type: none; line-heignt:20px;  '><a href='javascript:void(0);' style='color:#666666; text-decoration:none;display: inline-block;width: 485px;height: 30px;' data-userid='"+item.id+"'>"+item.userName+"</a></li>";
+						    inHtml+="<tr><td>"+item.userName+"</td><td>"+item.email+"</td>";
+						    if(item.status ==1){
+						    	inHtml+="<td>启用</td>"
+						    }else{
+						    	inHtml+="<td>禁用</td>";
+						    }
+						    inHtml+="<td>"+showLocale(item.addTime)+"</td></tr>";
 						 }
 					});
 				
 					if(data.length!=0){
-						 inHtml+="</ul></div></div>";
+						 inHtml+="</table></div></div>";
 					}else{
 						inHtml+="<div class='search-look-all-result'><a href='javascript:void(0);'>暂无搜索结果</a></div>";
 					}
