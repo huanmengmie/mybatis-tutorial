@@ -7,7 +7,7 @@
     1. 配置 SecurityManager!
     -->     
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <!-- <property name="cacheManager" ref="cacheManager"/> -->
+        <property name="cacheManager" ref="cacheManager"/>
         <property name="authenticator" ref="authenticator"></property>
         <!--多realms配置-->
 		<property name="realms">
@@ -27,10 +27,10 @@
     2. 配置 CacheManager. 
     2.1 需要加入 ehcache 的 jar 包及配置文件. 
     -->     
-   <!--  <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 
         <property name="cacheManagerConfigFile" value="classpath:config/ehcache.xml"/> 
-    </bean> -->
+    </bean> 
     
     <bean id="authenticator" 
     	class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
