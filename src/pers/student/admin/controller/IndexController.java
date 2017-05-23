@@ -22,20 +22,10 @@ import pers.student.admin.service.UserService;
 @RequestMapping("/admin")
 public class IndexController {
 
-	@Autowired
-	private UserService userService;
 	
 	@RequestMapping("/index")
 	public String goIndex(ModelMap map){
-		
-		Subject currentUser = SecurityUtils.getSubject();
-	    String  userName=(String) currentUser.getPrincipal();
-	    SecurityUser user=new SecurityUser();
-	    user.setUserName(userName);
-		user=userService.selectByUniqueFiled(user);
-		
-		
-		map.put("user", user);
+	
 		return "admin/index";
 	}
 }
