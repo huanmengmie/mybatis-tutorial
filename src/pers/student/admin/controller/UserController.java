@@ -66,7 +66,7 @@ public class UserController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping("dealLogin")
+	@RequestMapping("/dealLogin")
 	public void dealLogin(String userName,String password,HttpServletRequest request,HttpServletResponse response){
 		Subject currentUser = SecurityUtils.getSubject();
 		
@@ -298,9 +298,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/logout")
-	public String logout(){
+	public String logout(HttpServletRequest request){
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
+		//session置为空
+		HttpSession session =request.getSession();
+		session.removeAttribute("uid");
+		session.removeAttribute("role");
 		return "redirect:login";
 	}
 	
