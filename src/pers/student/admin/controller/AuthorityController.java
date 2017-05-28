@@ -64,7 +64,7 @@ public class AuthorityController{
 	public String showRoleList(ModelMap map){
 		
 		//获取角色列表
-		ArrayList<SecurityRole> roles=(ArrayList<SecurityRole>)roleService.findAll();
+		ArrayList<SecurityRole> roles = (ArrayList<SecurityRole>)roleService.findAll();
 		
 		map.put("roles", roles);
 		return "admin/authority/role-list";
@@ -87,8 +87,8 @@ public class AuthorityController{
     @RequestMapping("/saveRole")
     @ResponseBody
     public String saveRole(SecurityRole role){
-    	int result =roleService.insert(role);
-    	return result+"";
+    	int result = roleService.insert(role);
+    	return result + "";
     }
     
     /**
@@ -107,15 +107,15 @@ public class AuthorityController{
 		    //将字符串转为字符串数组
 	        String[] idArray = ids.split(","); 
 	        //将字符串数组转为整形数组
-	        Integer[] iid=new Integer[idArray.length];
-	        for(int i=0;i<iid.length;i++){
-	        	iid[i]=Integer.parseInt(idArray[i]);
+	        Integer[] iid = new Integer[idArray.length];
+	        for(int i = 0;i < iid.length; i++){
+	        	iid[i] = Integer.parseInt(idArray[i]);
 	        }
 	        //将数组转为list
 	        List<Integer> idList = new ArrayList<Integer>();	
 	        Collections.addAll(idList, iid);
 	        
-	        SecurityRole role=new SecurityRole();
+	        SecurityRole role = new SecurityRole();
 	        role.setIds(idList);
 	        //执行删除语句
 	        roleService.deleteBatch(role);
@@ -133,15 +133,15 @@ public class AuthorityController{
 	 */
 	@RequestMapping("/findRoleByName")
 	public  void findRoleByName(String token,HttpServletResponse response){
-		PrintWriter out=null;
+		PrintWriter out = null;
 		//获取权限列表
-		ArrayList<SecurityRole> roles=(ArrayList<SecurityRole>) roleService.selectRoleByToken(token);
+		ArrayList<SecurityRole> roles = (ArrayList<SecurityRole>) roleService.selectRoleByToken(token);
 		 //调用fastjson生成json信息
 		String json = JSON.toJSONString(roles, true);
 		System.out.println(json);
 		response.setContentType("application/json");
 		try {
-			out=response.getWriter();
+			out = response.getWriter();
 			out.write(json);
 			
 		} catch (IOException e) {
@@ -163,29 +163,29 @@ public class AuthorityController{
 	@RequestMapping("/allocation")
 	public String showAllotRole(int p,ModelMap map){
 		 
-		   String sp=p+"";
+		   String sp = p + "";
 		   if(sp.equals("")){
-				p=1;
+				p = 1;
 		   }
 		   //当前的url
-		   String url="./allocation?p=";
+		   String url = "./allocation?p=";
 			
 		   //获取总记录量
-		   int count=userService.findUserCount();
+		   int count = userService.findUserCount();
 		   //计算偏移量
-		   int position=(p-1)*pageSize;
+		   int position = (p-1)*pageSize;
 		   
-		   HashMap<String,Object> uMap=new HashMap<String,Object>();
+		   HashMap<String,Object> uMap = new HashMap<String,Object>();
 		   uMap.put("position", position);
 		   uMap.put("pageSize",pageSize);
 		   
-		   ArrayList<SecurityUser> user=(ArrayList<SecurityUser>)userService.selectUserList(uMap);
+		   ArrayList<SecurityUser> user = (ArrayList<SecurityUser>)userService.selectUserList(uMap);
 		 
 		   //获取封装好的分页导航数据
-	       String toolBar=pageHelperService.createToolBar(count,pageSize, url, p);		
+	       String toolBar = pageHelperService.createToolBar(count,pageSize, url, p);		
 
 	       //获取角色列表
-		   ArrayList<SecurityRole> roles=(ArrayList<SecurityRole>)roleService.findAll();
+		   ArrayList<SecurityRole> roles = (ArrayList<SecurityRole>)roleService.findAll();
 			
 		   map.put("roles", roles);
 	       map.put("user", user);
@@ -205,14 +205,14 @@ public class AuthorityController{
 		int r;
 		
 		//更新数据
-		int result=userToRoleService.update(userToRole);
+		int result = userToRoleService.update(userToRole);
 		if(result>0){
-			r=1;
+			r = 1;
 		}else{
-			r=0;
+			r = 0;
 		}		
 		
-		return r+"";
+		return r + "";
 	}
 	
 	
@@ -229,15 +229,15 @@ public class AuthorityController{
 		    //将字符串转为字符串数组
 	        String[] idArray = ids.split(","); 
 	        //将字符串数组转为整形数组
-	        Integer[] iid=new Integer[idArray.length];
-	        for(int i=0;i<iid.length;i++){
-	        	iid[i]=Integer.parseInt(idArray[i]);
+	        Integer[] iid = new Integer[idArray.length];
+	        for(int i = 0; i< iid.length; i++){
+	        	iid[i] = Integer.parseInt(idArray[i]);
 	        }
 	        //将数组转为list
 	        List<Integer> idList = new ArrayList<Integer>();	
 	        Collections.addAll(idList, iid);
 	        
-	        SecurityUser user=new SecurityUser();
+	        SecurityUser user = new SecurityUser();
 	        user.setIds(idList);
 	        //执行删除语句
 	        userService.deleteBatch(user);
@@ -255,7 +255,7 @@ public class AuthorityController{
 	 */
 	@RequestMapping("/resources")
 	public String resources(ModelMap map){
-		ArrayList<SecurityResources> resources=(ArrayList<SecurityResources>) resourcesService.findAll();
+		ArrayList<SecurityResources> resources = (ArrayList<SecurityResources>) resourcesService.findAll();
 	
 		map.put("resources", resources);
 		return "admin/authority/resources-list";
@@ -268,15 +268,15 @@ public class AuthorityController{
 	 */
 	@RequestMapping("/findUserByName")
 	public  void findUserByName(String token,HttpServletResponse response){
-		PrintWriter out=null;
+		PrintWriter out = null;
 		//获取权限列表
-		ArrayList<SecurityUser> roles=(ArrayList<SecurityUser>)  userService.selectAllUserByToken(token);
+		ArrayList<SecurityUser> roles = (ArrayList<SecurityUser>)  userService.selectAllUserByToken(token);
 		 //调用fastjson生成json信息
 		String json = JSON.toJSONString(roles, true);
 		System.out.println(json);
 		response.setContentType("application/json");
 		try {
-			out=response.getWriter();
+			out = response.getWriter();
 			out.write(json);
 			
 		} catch (IOException e) {

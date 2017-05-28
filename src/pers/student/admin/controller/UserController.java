@@ -72,7 +72,7 @@ public class UserController {
 		
 		response.setCharacterEncoding("UTF-8");  
 		response.setContentType("application/json");
-		PrintWriter out=null;
+		PrintWriter out = null;
 		String flag="1";
 		
 		if (!currentUser.isAuthenticated()) {
@@ -85,14 +85,14 @@ public class UserController {
             	// 执行登录. 
                 currentUser.login(token);
                
-        		Set<String> role= userService.getRoles(userName);
+        		Set<String> role = userService.getRoles(userName);
         		System.out.println("role-"+role);
-        		SecurityUser user=new SecurityUser();
+        		SecurityUser user = new SecurityUser();
         	    user.setUserName(userName);
-        		user=(SecurityUser) userService.selectByUniqueFiled(user);
+        		user = (SecurityUser) userService.selectByUniqueFiled(user);
         		//获取uid
-        		int uid=user.getId();
-        		HttpSession session =request.getSession();
+        		int uid = user.getId();
+        		HttpSession session = request.getSession();
         		//将用户信息保存到session 中
                 session.setAttribute("role", role);
                 session.setAttribute("uid", uid);
@@ -131,12 +131,12 @@ public class UserController {
 			
 		
 			//获取原始密码
-			String pw=user.getPassword();
+			String pw = user.getPassword();
 			//获取用户名
-			String userName=user.getUserName();
+			String userName = user.getUserName();
 			//密码用MD5加密，并且需要加点盐
 			user.setSalt(userName);
-			Object object=CrypographyUtil.MD5(userName, pw, userName);
+			Object object = CrypographyUtil.MD5(userName, pw, userName);
 			
 			user.setPassword(object.toString());
 			//将用户状态置为1
@@ -145,7 +145,7 @@ public class UserController {
 			
 			System.out.println("UID==="+user.getId());
 			//将用户的角色置为游客
-			SecurityUserToRole userToRole=new SecurityUserToRole();
+			SecurityUserToRole userToRole = new SecurityUserToRole();
 			userToRole.setRoleId(2);
 			userToRole.setUserId(user.getId());
 			userToRoleService.insert(userToRole);
@@ -166,15 +166,15 @@ public class UserController {
 	@RequestMapping("/checkUser")
 	@ResponseBody
 	public String checkUser(String userName){
-		SecurityUser user=new SecurityUser();
+		SecurityUser user = new SecurityUser();
 		user.setUserName(userName);
-		user=(SecurityUser) userService.selectByUniqueFiled(user);
+		user = (SecurityUser) userService.selectByUniqueFiled(user);
       
-        String result=""; 
-        if(user==null){
-        	result="1";
+        String result = ""; 
+        if(user == null){
+        	result = "1";
         }else{
-        	result="0";
+        	result = "0";
         }
 		return result;
 	}
@@ -187,15 +187,15 @@ public class UserController {
 	@RequestMapping("/checkEmail")
 	@ResponseBody
 	public String checkEmail(String email){
-		SecurityUser user=new SecurityUser();
+		SecurityUser user = new SecurityUser();
 		user.setEmail(email);
-		user=(SecurityUser) userService.selectByUniqueFiled(user);
+		user = (SecurityUser) userService.selectByUniqueFiled(user);
       
-        String result=""; 
-        if(user==null){
-        	result="1";
+        String result = ""; 
+        if(user == null){
+        	result = "1";
         }else{
-        	result="0";
+        	result = "0";
         }
 		return result;
 	}
@@ -215,14 +215,14 @@ public class UserController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public String updatwePassword(int uid,String userName,String email, @RequestParam(required=false) String oldPassword, @RequestParam(required=false) String newPassword){
-		String result="";
-		SecurityUser user=new SecurityUser();
-		user=(SecurityUser) userService.findById(uid);
+		String result = "";
+		SecurityUser user = new SecurityUser();
+		user = (SecurityUser) userService.findById(uid);
 		//先获取原始密码
-		String oldpw=user.getPassword();
+		String oldpw = user.getPassword();
 		System.out.println(oldpw);
 		//获取原始用户名
-		String oldUsername=user.getUserName();
+		String oldUsername = user.getUserName();
 		
 		
 		//此时判断一下密码是否为空
@@ -236,21 +236,21 @@ public class UserController {
 			
 		}else{
 			//需要将传过来的比对的密码进行加密
-			Object object=CrypographyUtil.MD5(oldUsername, oldPassword, oldUsername);
-			String oldMD5Pw=object.toString();
+			Object object = CrypographyUtil.MD5(oldUsername, oldPassword, oldUsername);
+			String oldMD5Pw = object.toString();
 			if(oldMD5Pw.equals(oldpw)){
 				//此时密码比对正确，进行更改密码和用户名操作
 		
 				 //将密码进行MD5加密保存
-				 Object object2=CrypographyUtil.MD5(userName, newPassword, userName);
-				 String MD5Pw=object2.toString();
+				 Object object2 = CrypographyUtil.MD5(userName, newPassword, userName);
+				 String MD5Pw = object2.toString();
 			     user.setUserName(userName);
 				 user.setEmail(email);
 				 user.setPassword(MD5Pw);
 				 user.setSalt(userName);
 				
 			}else{
-				result="0";
+				result = "0";
 			}	
 		}
 		
@@ -260,7 +260,7 @@ public class UserController {
 			 userService.update(user);
 			 return "1";
 		 }catch(RuntimeException e){
-			 result="2";
+			 result = "2";
 		 }
 		return result;
 	}
@@ -272,11 +272,11 @@ public class UserController {
 	
 	@RequestMapping("/findUserInfo")
 	public void findUserInfo(String userName,HttpServletResponse response){
-		PrintWriter out=null;
+		PrintWriter out = null;
 		//获取权限列表
-		SecurityUser user=new SecurityUser();
+		SecurityUser user = new SecurityUser();
 		user.setUserName(userName);
-		user= userService.selectByUniqueFiled(user);
+		user = userService.selectByUniqueFiled(user);
 		 //调用fastjson生成json信息
 		String json = JSON.toJSONString(user, true);
 		System.out.println(json);
@@ -302,7 +302,7 @@ public class UserController {
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
 		//session置为空
-		HttpSession session =request.getSession();
+		HttpSession session = request.getSession();
 		session.removeAttribute("uid");
 		session.removeAttribute("role");
 		return "redirect:login";

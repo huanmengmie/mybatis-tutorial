@@ -50,14 +50,14 @@ public class TeacherController {
 	public void findStudentInfo(String token,HttpServletResponse response){
 	
 		response.setCharacterEncoding("UTF-8");  
-		PrintWriter out=null;
+		PrintWriter out = null;
 		
-		ArrayList<SecurityUser> list=(ArrayList<SecurityUser>) userService.selectUserByToken(token);
+		ArrayList<SecurityUser> list = (ArrayList<SecurityUser>) userService.selectUserByToken(token);
 		String json = JSON.toJSONString(list, true);
 		System.out.println(json);
 		response.setContentType("application/json");
 		try {
-			out=response.getWriter();
+			out = response.getWriter();
 			out.write(json);
 			
 		} catch (IOException e) {
@@ -74,30 +74,30 @@ public class TeacherController {
 	 */
 	@RequestMapping("/findStudentList")
 	public String  findStudentList(int p,ModelMap map){
-	   String sp=p+"";
+	   String sp = p + "";
 	   if(sp.equals("")){
-			p=1;
+			p = 1;
 	   }
 	   //当前的url
-	   String url="./findStudentList?p=";
+	   String url = "./findStudentList?p=";
 		
 	   //获取总记录量
-	   int count=userService.findStudentCount();
+	   int count = userService.findStudentCount();
 	   //计算偏移量
-	   int position=(p-1)*pageSize;
+	   int position = (p-1)*pageSize;
 	 
-	   HashMap<String,Object> uMap=new HashMap<String,Object>();
+	   HashMap<String,Object> uMap = new HashMap<String,Object>();
 	   uMap.put("position", position);
 	   uMap.put("pageSize",pageSize);
-	   ArrayList<SecurityUser> list=(ArrayList<SecurityUser>) userService.selectStudent(uMap);
+	   ArrayList<SecurityUser> list = (ArrayList<SecurityUser>) userService.selectStudent(uMap);
 	   
 	   //分页工具
-	   String toolBar=pageHelperService.createToolBar(count, pageSize, url, p);
+	   String toolBar = pageHelperService.createToolBar(count, pageSize, url, p);
 	   
 	   //个人信息	
 	   Subject currentUser = SecurityUtils.getSubject();
-	   String  userName=(String) currentUser.getPrincipal();
-	   SecurityUser user=new SecurityUser();
+	   String  userName = (String) currentUser.getPrincipal();
+	   SecurityUser user = new SecurityUser();
 	   user.setUserName(userName);
 	   user=userService.selectByUniqueFiled(user);
 		

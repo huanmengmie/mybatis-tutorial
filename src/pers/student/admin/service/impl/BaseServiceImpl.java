@@ -50,8 +50,8 @@ public class BaseServiceImpl<T> implements BaseService<T>{
  	
     public  BaseServiceImpl(){
     	 //通过反射机制获取子类传递过来的实体类型信息
-    	 ParameterizedType type=(ParameterizedType) this.getClass().getGenericSuperclass();
-    	 clazz=(Class) type.getActualTypeArguments()[0];
+    	 ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+    	 clazz = (Class) type.getActualTypeArguments()[0];
      }
      
  	@PostConstruct

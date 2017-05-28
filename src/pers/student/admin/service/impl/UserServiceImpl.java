@@ -28,8 +28,8 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 	@Override
 	public Set<String> getRoles(String userName) {
 		// TODO Auto-generated method stub
-		Set<String>  roles =new HashSet<String>();
-		String roleCode=securityUserMapper.selectUserRole(userName);
+		Set<String>  roles = new HashSet<String>();
+		String roleCode = securityUserMapper.selectUserRole(userName);
 		roles.add(roleCode);
 		return roles;
 	}
@@ -37,11 +37,11 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 	@Override
 	public Set<String> getPermissions(String userName) {
 		// TODO Auto-generated method stub
-		Set<String>  permissions =new HashSet<String>();
-		SecurityUser user=securityUserMapper.selectUserPersmission(userName);
+		Set<String>  permissions = new HashSet<String>();
+		SecurityUser user = securityUserMapper.selectUserPersmission(userName);
 		if(user!=null){
 			
-			ArrayList<SecurityPermission> list=(ArrayList<SecurityPermission>) user.getPermission(); 
+			ArrayList<SecurityPermission> list = (ArrayList<SecurityPermission>) user.getPermission(); 
 			
 			for(SecurityPermission l :list){
 				permissions.add(l.getPermissionName());
@@ -53,7 +53,7 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 	@Override
 	public List<SecurityUser> selectUserByToken(String username) {
 		// TODO Auto-generated method stub
-		List<SecurityUser> list=securityUserMapper.selectUserByToken(username);
+		List<SecurityUser> list = securityUserMapper.selectUserByToken(username);
 		return list;
 	}
 
@@ -61,7 +61,7 @@ public class UserServiceImpl extends BaseServiceImpl<SecurityUser> implements Us
 	public List<SecurityUser> selectStudent(Map map) {
 		// TODO Auto-generated method stub
 		
-		List<SecurityUser> list=securityUserMapper.selectStudent(map);
+		List<SecurityUser> list = securityUserMapper.selectStudent(map);
 		return list;
 	}
 

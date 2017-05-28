@@ -1,12 +1,9 @@
 package pers.student.admin.service;
 
 /**
- * 
-* @ClassName: IPageHelperService
-* @Description: TODO生成 分页导航
-* @author Mingshan
-* @date 2017年3月28日 下午1:09:49
-*
+ * 分页导航
+ * @author mingshan
+ *
  */
 public interface PageHelperService {
 	/**
