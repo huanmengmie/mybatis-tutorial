@@ -46,7 +46,8 @@ public class BaseServiceImpl<T> implements BaseService<T>{
  	@Autowired
  	private SecurityRoleMapper securityRoleMapper;
  	
- 	@Autowired SecurityUserToRoleMapper securityUserToRoleMapper;
+ 	@Autowired 
+ 	private SecurityUserToRoleMapper securityUserToRoleMapper;
  	
     public  BaseServiceImpl(){
     	 //通过反射机制获取子类传递过来的实体类型信息
